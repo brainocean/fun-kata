@@ -1,0 +1,3 @@
+#+TITLE: Readme of fun-kata
+
+This is the readme of fun-kata, functional kata practice.
