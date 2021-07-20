@@ -4,7 +4,8 @@
   "description": "This is the readme of fun-kata, functional kata practice.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,8 @@
   "homepage": "https://github.com/brainocean/fun-kata#readme",
   "devDependencies": {
     "jest": "^27.0.6"
+  },
+  "dependencies": {
+    "ramda": "^0.27.1"
   }
 }

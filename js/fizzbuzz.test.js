@@ -1,3 +1,4 @@
+
 function isDividable(dividend, divisor) {
     return dividend % divisor === 0;
 }
@@ -12,7 +13,7 @@ function isIncluded(whole, piece) {
 /**
  * Dividable by 3 produces fuzz, 5 produces buzz.
  */
-function fizzbuzz(number) {
+function fizzbuzz1(number) {
     let returnString = "";
     if (!Number.isInteger(number) || !isBetween(number, 1, 100)) {
         return "error!"
@@ -29,6 +30,8 @@ function fizzbuzz(number) {
         return returnString;
     }
 }
+
+const fizzbuzz = require("./fizzbuzz");
 
 test('should 1 to be 1', () => {
     expect(fizzbuzz(1)).toBe(1);
