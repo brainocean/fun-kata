@@ -10,20 +10,27 @@ function isIncluded(whole, piece) {
     let pieceString = piece.toString();
     return wholeString.indexOf(pieceString) >= 0;
 }
+
+function replacePart(number, factor, replacement) {
+    if (isDividable(number, factor) || isIncluded(number, factor)) {
+        return replacement;
+    } else {
+        return "";
+    }
+}
 /**
  * Dividable by 3 produces fuzz, 5 produces buzz.
  */
-function fizzbuzz1(number) {
+function fizzbuzz_thomas(number) {
     let returnString = "";
     if (!Number.isInteger(number) || !isBetween(number, 1, 100)) {
         return "error!"
     }
-    if (isDividable(number, 3) || isIncluded(number, 3)) {
-        returnString = returnString + "fizz";
-    }
-    if (isDividable(number, 5) || isIncluded(number, 5)) {
-        returnString = returnString + "buzz";
-    }
+    
+    returnString += replacePart(number, 3, "fizz");
+    returnString += replacePart(number, 5, "buzz");
+    returnString += replacePart(number, 7, "pass");
+
     if (returnString === "") {
         return number;
     } else {
@@ -31,7 +38,8 @@ function fizzbuzz1(number) {
     }
 }
 
-const fizzbuzz = require("./fizzbuzz");
+// const fizzbuzz = require("./fizzbuzz");
+const fizzbuzz = fizzbuzz_thomas;
 
 test('should 1 to be 1', () => {
     expect(fizzbuzz(1)).toBe(1);
@@ -51,6 +59,10 @@ test('should 4 to be 4', () => {
 
 test('should 5 to be buzz', () => {
     expect(fizzbuzz(5)).toBe("buzz");
+});
+
+test('should 7 to be pass', () => {
+    expect(fizzbuzz(7)).toBe("pass");
 });
 
 test('should 15 to be fizzbuzz', () => {
@@ -88,7 +100,7 @@ test('should 25 to be buzz', () => {
 });
 
 test('should 35 to be fizzbuzz', () => {
-    expect(fizzbuzz(35)).toBe("fizzbuzz");
+    expect(fizzbuzz(35)).toBe("fizzbuzzpass");
 });
 
 test('should 53 to be fizzbuzz', () => {
