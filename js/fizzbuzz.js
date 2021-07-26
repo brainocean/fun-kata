@@ -17,7 +17,7 @@ const rules = [
   [7, "pass"]
 ];
 
-const num2tag = (num) => rules.map( 
+const num2tag = (num) => rules.map(
   (rule) => isPartOf(rule[0], num) ? rule[1] : "" 
 );
 
