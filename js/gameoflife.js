@@ -2,10 +2,13 @@ const { indexOf, last } = require("ramda");
 
 function nextGeneration(lastGeneration) {
     const GRID_SIZE = 8;
-    // for each cell, 
-    //  if live neighbors count <=1, 
-    //      then cell dies
-    //  else cell lives
+    let newGeneration = [];
+    for(let i=0;i<GRID_SIZE; i++) {
+        newGeneration.push([]);
+        for(let j=0; j<GRID_SIZE; j++) {
+            newGeneration[i][j] = lastGeneration[i][j];
+        }
+    }
     lastGeneration.forEach((elm,y) => {
         elm.forEach((pic,x) => {
             let neighbors = [];
@@ -33,20 +36,20 @@ function nextGeneration(lastGeneration) {
             if (x + 1 < GRID_SIZE) {
                 neighbors.push(lastGeneration[y][x + 1]);
             }
-            let livingNeighbors = [];
+            let livingNeighborsCounter = 0;
             neighbors.forEach(element => {
-                if (element = 1) {
-                    livingNeighbors.push(element);
+                if (element === 1) {
+                    livingNeighborsCounter += 1;
                 }
             });
-            if (livingNeighbors.length <= 1 || livingNeighbors.length >= 4) {
-                lastGeneration[x,y] = 0;
-            } else if (livingNeighbors.length == 3) {
-                lastGeneration[x,y] = 1;
+            if (livingNeighborsCounter <= 1 || livingNeighborsCounter >= 4) {
+                newGeneration[y][x] = 0;
+            } else if (livingNeighborsCounter === 3) {
+                newGeneration[y][x] = 1;
             }
         });
     });
-    return lastGeneration;
+    return newGeneration;
 }
 
 module.exports = nextGeneration;

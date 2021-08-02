@@ -54,6 +54,8 @@ test('should central single one generates all zero', () => {
 });
 
 test('should three in a row generates three in a column', () => {
+    const result = nextGeneration(threeInOneRow);
+    console.log(result);
     expect(nextGeneration(threeInOneRow)).toEqual(threeInOneColumn);
 });
 
