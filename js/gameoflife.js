@@ -1,5 +1,3 @@
-const { indexOf, last } = require("ramda");
-
 const GRID_SIZE = 8;
 
 function getCellValue(y, x, grid) {
@@ -16,8 +14,6 @@ function getNeighborsCount(y, x, grid) {
         [0, -1], [0, 1],
         [1, -1], [1, 0], [1, 1],
     ];
-    const a = neighborCoords.map( cs=> getCellValue(y+cs[0], x+cs[1], grid));
-
     const neighborCount = neighborCoords.reduce( 
         (sum, coords)=>{ 
             return sum + getCellValue(y+coords[0], x+coords[1], grid);
@@ -25,23 +21,6 @@ function getNeighborsCount(y, x, grid) {
         0
     );
     return neighborCount;
-}
-
-function nextGeneration1(lastGeneration) {
-    let newGeneration = [];
-    for(let i=0;i<GRID_SIZE; i++) {
-        newGeneration.push([]);
-        for(let j=0; j<GRID_SIZE; j++) {
-            newGeneration[i][j] = lastGeneration[i][j];
-            let livingNeighborsCounter = getNeighborsCount(i, j, lastGeneration);
-            if (livingNeighborsCounter <= 1 || livingNeighborsCounter >= 4) {
-                newGeneration[i][j] = 0;
-            } else if (livingNeighborsCounter === 3) {
-                newGeneration[i][j] = 1;
-            }
-        }
-    }
-    return newGeneration;
 }
 
 function cellNextGen(value, x, y, grid) {
@@ -55,6 +34,16 @@ function cellNextGen(value, x, y, grid) {
     return 0;
 }
 
+function nextGeneration1(lastGeneration) {
+    let newGeneration = [];
+    for(let i=0;i<GRID_SIZE; i++) {
+        newGeneration.push([]);
+        for(let j=0; j<GRID_SIZE; j++) {
+            newGeneration[i][j] = cellNextGen(lastGeneration[i][j], i, j, lastGeneration)
+        }
+    }
+    return newGeneration;
+}
 
 function nextGeneration(lastGeneration) {
     return lastGeneration.map( 
