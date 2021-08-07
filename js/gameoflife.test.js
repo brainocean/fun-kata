@@ -15,7 +15,7 @@ const centralSingleOne = [
     [0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0],
-    [0,0,0,0,1,0,0,0],
+    [0,0,0,1,0,0,0,0],
     [0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0],
@@ -54,8 +54,7 @@ test('should central single one generates all zero', () => {
 });
 
 test('should three in a row generates three in a column', () => {
-    const result = nextGeneration(threeInOneRow);
-    console.log(result);
+    const a = nextGeneration(threeInOneRow);
     expect(nextGeneration(threeInOneRow)).toEqual(threeInOneColumn);
 });
 
