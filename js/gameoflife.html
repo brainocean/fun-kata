@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" initial-scale=1.0">
+    <title>Game Of Life</title>
+    <style>
+      .cell {
+        background-color: white;
+        width: 20px;
+        height: 20px;
+        border: 1px black solid;
+      }
+      .cell-live {
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Play the game of life!</h1>
+    <div id="grid-table"></div>
+    <script src="gameoflife.js"></script>
+    <script>
+      const initGen = [
+        [0, 1, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0, 0, 0],
+        [1, 1, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1, 1, 1],
+        [0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 1, 0],
+      ];
+      let newGen = initGen;
+      let currentStep = 0;
+      let intervalId = setInterval(() => {
+        newGen = nextGeneration(newGen);
+        const table = gridToTable(newGen);
+        document.getElementById("grid-table").innerHTML = table;
+        currentStep+=1;
+        if(currentStep>=100) clearInterval(intervalId); 
+      }, 100);
+    </script>
+  </body>
+</html>

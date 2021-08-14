@@ -54,3 +54,18 @@ function nextGeneration(lastGeneration) {
 }
 
 module.exports = nextGeneration;
+
+function cellToTD(x, y, value) {
+    const td = `<td class="${value===1 ? "cell-live" : "cell"}" id="${x+"-"+y}"></td>`;
+    return td;
+}
+
+function rowToTR(y, row) {
+    const tds = row.map( (cell, x) => cellToTD(x, y, cell) );
+    return `<tr>${tds.join("")}</tr>`;
+}
+
+function gridToTable(grid) {
+    const trs = grid.map((row, y) => rowToTR(y, row));
+    return `<table>${trs.join("")}</table>`;
+}
